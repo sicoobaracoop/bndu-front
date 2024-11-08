@@ -3,6 +3,7 @@ import { Cidade } from "../../utils/interface"
 import { FaRegTrashCan } from "react-icons/fa6"
 import { GoPencil } from "react-icons/go"
 import { useMutationDestroyCidade } from "../../hooks/cidades/useMutationDestroyCidade"
+import { formatDate } from "../../utils/formatar"
 
 interface ItemCidadeProps {
     cidade: Cidade
@@ -24,7 +25,7 @@ export function ItemCidade({ cidade }: ItemCidadeProps) {
             </Td>
             <Td>
                 <Box display={'flex'} flexDir={'row'} gap={2}>
-                    <Text fontWeight={500} m={'auto'}>{cidade.created_at}</Text>
+                    <Text fontWeight={500} m={'auto'}>{formatDate(cidade.created_at)}</Text>
                 </Box>
             </Td>
             <Td>

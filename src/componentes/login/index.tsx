@@ -39,6 +39,8 @@ export function Login() {
                     </FormControl>
                     <FormControl>
                         <Button
+                            isLoading={mutationLoginUser.isPending}
+                            loadingText={'Aguarde..'}
                             onClick={handleSubmit(submitLogin)}
                             w={'100%'}
                             bg={'#49479D'}

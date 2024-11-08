@@ -9,16 +9,16 @@ export const validationSchemaCreateCidade = zod.object({
 });
 
 export const validationSchemaCreateImovel = zod.object({
-    cidadeID: zod.string(),
-    tipoID: zod.string(),
-    endereco: zod.string(),
+    cidadeID: zod.string().min(1),
+    tipoID: zod.string().min(1),
+    endereco: zod.string().min(1),
     quantidadeQuarto: zod.string(),
     quantidadeGaragem: zod.string(),
     quantidadeBanheiros: zod.string(),
-    valor: zod.string(),
-    numeroDaMatricula: zod.string(),
-    area: zod.string(),
-    descricao: zod.string(),
+    valor: zod.string().min(1),
+    numeroDaMatricula: zod.string().min(2),
+    area: zod.string().min(1),
+    descricao: zod.string().min(3),
     fotos: zod.array(zod.instanceof(File)).optional(),
 });
 
