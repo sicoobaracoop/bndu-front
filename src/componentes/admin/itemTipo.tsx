@@ -1,9 +1,9 @@
 import { Box, Td, Text, Tooltip, Tr } from "@chakra-ui/react";
 import { FaRegTrashCan } from "react-icons/fa6";
-import { GoPencil } from "react-icons/go";
 import { Tipo } from "../../utils/interface";
 import { useMutationDestroyTipo } from "../../hooks/tipos/useMutationDestroyTipo";
 import { formatDate } from "../../utils/formatar";
+import Swal from "sweetalert2";
 
 interface ItemTipoProps {
   tipo: Tipo;
@@ -11,6 +11,27 @@ interface ItemTipoProps {
 
 export function ItemTipo({ tipo }: ItemTipoProps) {
   const mutationDestroyTipo = useMutationDestroyTipo();
+
+  const handleOpenDialogDestroy = () => {
+    Swal.fire({
+      title: "Realmente deseja excluir essa Categoria?",
+      showClass: {
+        popup: "animate__animated animate__fadeInDown",
+      },
+      hideClass: {
+        popup: "animate__animated animate__fadeOutUp",
+      },
+      backdrop: "rgba(0, 0, 0, 0.7)",
+      position: "center",
+      showCancelButton: true,
+      confirmButtonText: "Sim!",
+      cancelButtonText: "Não",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        destroyTipo();
+      }
+    });
+  };
 
   const destroyTipo = async () => {
     await mutationDestroyTipo.mutateAsync(tipo.id);
@@ -43,16 +64,12 @@ export function ItemTipo({ tipo }: ItemTipoProps) {
             <Box
               _hover={{ color: "#ad1616" }}
               cursor={"pointer"}
-              onClick={destroyTipo}
+              onClick={handleOpenDialogDestroy}
             >
               <FaRegTrashCan size={22} />
             </Box>
           </Tooltip>
-          <Tooltip hasArrow label="Editar" bg={"#178620"}>
-            <Box _hover={{ color: "#178620" }} cursor={"pointer"}>
-              <GoPencil size={23} />
-            </Box>
-          </Tooltip>
+
         </Box>
       </Td>
     </Tr>

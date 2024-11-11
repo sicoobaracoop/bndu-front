@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "@tanstack/react-query";
 import { api } from "../../lib/axios";
 import { queryClient } from "../../lib/reactQuery";
@@ -17,7 +18,7 @@ export function useMutationDestroyTipo() {
         },
         onError: (error) => {
             const axiosError = error as any;
-            const errorTitle = axiosError.response?.data?.detail || 'Ocorreu um erro desconhecido';
+            const errorTitle = axiosError.response?.data?.mensagem || 'Ocorreu um erro desconhecido';
             toast({ title: errorTitle, status: 'error', duration: 5000, isClosable: true, position: 'top-left' });
         }
     })

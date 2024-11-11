@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { Box, Heading } from "@chakra-ui/react";
 import bannerHome from "../../images/banner.png";
 import { BuscadorDeImoveis } from "../buscador";

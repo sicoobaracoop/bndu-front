@@ -18,6 +18,7 @@ export function useMutationCreateTipo() {
             toast({ title: 'Novo tipo criado!', status: 'success', duration: 2500, isClosable: true, position: 'top-right' });
         },
         onError: (error) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const axiosError = error as any;
             const errorTitle = axiosError.response?.data?.detail || 'Ocorreu um erro desconhecido';
             toast({ title: errorTitle, status: 'error', duration: 5000, isClosable: true, position: 'top-left' });

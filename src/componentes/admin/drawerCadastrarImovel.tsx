@@ -115,7 +115,7 @@ export function DrawerCadastrarImovel({
         key={"modal-anexar-imagem"}
       />
       <Drawer isOpen={isOpen} onClose={onClose} size={"md"}>
-        <DrawerOverlay bg={"rgba(73, 71,157, 0.4)"} />
+        <DrawerOverlay bg={"rgba(73, 71,157, 0.6)"} />
         <DrawerContent>
           <DrawerHeader gap={3} display={"flex"} flexDir={"row"}>
             <BsHouseAdd size={30} />

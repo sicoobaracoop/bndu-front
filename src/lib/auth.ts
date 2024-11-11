@@ -1,4 +1,5 @@
 import { User } from "../utils/interface";
+import { api } from "./axios";
 
 export const TOKEN_KEY = "@bndu-aracoop-token";
 export const TOKEN_KEY_USER = "@bndu-aracoop-user";
@@ -13,3 +14,9 @@ export const login = (token: string, user: User) => {
 export const getToken = () => {
     return localStorage.getItem(TOKEN_KEY);
 }
+
+export const logout = async () => {
+    await api.post("/logout");
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(TOKEN_KEY_USER);
+  };

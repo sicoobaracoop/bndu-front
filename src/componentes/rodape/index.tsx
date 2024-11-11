@@ -5,7 +5,7 @@ export function Rodape() {
     const anoAtual = dataAtual.getFullYear();
     return (
         <Box
-            bg={'#00AE9D'}
+            bg={'#003641'}
             mt={'auto'}
             p={5}
             boxShadow={'rgba(0, 0, 0, 0.35) 0px 5px 15px'}

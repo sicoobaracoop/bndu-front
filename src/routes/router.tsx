@@ -11,6 +11,7 @@ type PrivateRouterProps = {
     Componente: React.FC;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 const PrivateRoute = ({Componente }: PrivateRouterProps) => 
     isAuthenticated() ? <Componente /> : <Navigate to="/login" />;
 

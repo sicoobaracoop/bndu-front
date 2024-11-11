@@ -24,7 +24,7 @@ async function getCidade({ page }: UseCidadeProps): Promise<GetCidadeResponse> {
         }
     });
 
-    let meta = {
+    const meta = {
         current_page: response.current_page,
         last_page: response.last_page,
         per_page: response.per_page,
