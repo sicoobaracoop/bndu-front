@@ -16,8 +16,8 @@ export function DetalhesComponente() {
     const { data } = useFindImoveis(Number(imovelId));
 
     const sliderImageUrl = data?.imovel.imagens.map(imagem => ({
-        original: import.meta.env.VITE_BASE_URL_BACKEND + 'storage/' + imagem.caminhoImagem,
-        thumbnail: import.meta.env.VITE_BASE_URL_BACKEND + 'storage/' + imagem.caminhoImagem
+        original: import.meta.env.VITE_BASE_URL + 'storage/' + imagem.caminhoImagem,
+        thumbnail: import.meta.env.VITE_BASE_URL + 'storage/' + imagem.caminhoImagem
     })) || [];
 
     return (
@@ -63,6 +63,10 @@ export function DetalhesComponente() {
                 </Flex>
                 <Box ml={'auto'} mt={2}>
                     <Button
+                        onClick={() => {
+                            const text = encodeURIComponent(`Olá, gostaria de saber mais detalhes sobre o imóvel Nº ${data?.imovel.id}, ${data?.imovel.tipo.nomeDoTipo}, ${data?.imovel.endereco}`)
+                            window.open(`https://api.whatsapp.com/send?phone=553432492550&text=${text}`, '_blank')                        
+                        }}
                         borderRadius={'4'}
                         bg={'#7DB61C'}
                         color={'white'}

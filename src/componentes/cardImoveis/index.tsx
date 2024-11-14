@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Flex, Img, Text } from "@chakra-ui/react";
+import { Box, Button, Divider, Flex, Image, Text } from "@chakra-ui/react";
 import { Imoveis } from "../../utils/interface";
 import { useNavigate } from "react-router-dom";
 import { LuBath, LuBedDouble } from "react-icons/lu";
@@ -15,7 +15,7 @@ export function CardImoveis({ imovel }: CardImoveisProps) {
     function handleClick() {
         navigate(`/detalhes/${imovel.id}`);
     }
-    const caminhoImageCard = import.meta.env.VITE_BASE_URL_BACKEND + 'storage/' + imovel.imagens[0].caminhoImagem;
+    const caminhoImageCard = import.meta.env.VITE_BASE_URL + 'storage/' + imovel.imagens[0].caminhoImagem;
     return (
         <Box
             onClick={handleClick}
@@ -30,13 +30,13 @@ export function CardImoveis({ imovel }: CardImoveisProps) {
                 transition: 'box-shadow 0.8s, width 0.8s'
             }}
         >
-            <Box>
-                <Img
-                    borderTopRadius={'10'}
-                    src={caminhoImageCard}
-                    alt={'Imagem do card de Imóveis a venda'}
-                />
-            </Box>
+            <Image
+                borderTopRadius={'10'}
+                src={caminhoImageCard}
+                alt={'Imagem do card de Imóveis a venda'}
+                objectFit={'cover'}
+                width={'100%'}
+            />
             <Box p={4}>
                 <Flex  mb={5} alignItems={'center'}>
                     <IoLocationOutline  size={22} />
