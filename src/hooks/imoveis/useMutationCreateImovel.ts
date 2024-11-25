@@ -8,6 +8,7 @@ export function useMutationCreateImovel() {
     const toast = useToast();
     return useMutation({
         mutationFn: async (data: newFormDataCreateImovel) => {
+            console.log('data.quantidadeBanheiros: ', data.quantidadeBanheiros)
             const formData = new FormData();
             formData.append('cidadeID', data.cidadeID);
             formData.append('tipoID', data.tipoID);

@@ -63,6 +63,8 @@ export function DrawerCadastrarImovel({
   const { data: dataCidade } = useCidadeAll();
   const [files, setFiles] = useState<File[]>([]);
   const mutationCadastrarImovel = useMutationCreateImovel();
+  const [valor, setValor] = useState<string>('R$ 0,0');
+
   const { register, handleSubmit, reset, getValues } =
     useForm<newFormDataCreateImovel>({
       resolver: zodResolver(validationSchemaCreateImovel),
@@ -93,6 +95,16 @@ export function DrawerCadastrarImovel({
     await mutationCadastrarImovel.mutateAsync(data);
     onClose();
     reset();
+  };
+
+  const formatarBrl = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const valorInput = e.target.value;
+    const numeros = valorInput.replace(/\D/g, "");
+
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(Number(numeros) / 100);
   };
 
   return (
@@ -223,6 +235,8 @@ export function DrawerCadastrarImovel({
                 {...register("valor")}
                 mt={-1.5}
                 focusBorderColor={"#49479D"}
+                value={valor}
+                onChange={(e) => setValor(formatarBrl(e))}
               />
             </FormControl>
             <FormControl isRequired mb={5}>
@@ -266,7 +280,7 @@ export function DrawerCadastrarImovel({
             <Button
               onClick={handleSubmit(cadastrarImovel)}
               isLoading={mutationCadastrarImovel.isPending}
-              loadingText={'Aguarde...'}
+              loadingText={"Aguarde..."}
               w={"100%"}
               bg={"#49479D"}
               color={"white"}

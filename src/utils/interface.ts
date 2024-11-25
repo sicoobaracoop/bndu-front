@@ -3,6 +3,7 @@ export interface Imoveis {
     cidadeID: number,
     tipoID: number,
     endereco: string,
+    qtdBanheiro: number;
     qtdGaragem: string,
     qtdQuarto: string,
     valor: number,

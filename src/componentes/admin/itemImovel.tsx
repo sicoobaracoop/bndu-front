@@ -1,6 +1,5 @@
 import { Box, Td, Text, Tooltip, Tr } from "@chakra-ui/react";
 import { Imoveis } from "../../utils/interface";
-import { formatBrl } from "../../utils/formatar";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { DestroyImovel } from "../../hooks/imoveis/useMutationDestroyImovel";
 import Swal from "sweetalert2";
@@ -65,6 +64,13 @@ export function ItemImovel({ imovel }: ItemImovelProps) {
         </Box>
       </Td>
       <Td>
+        <Box display={"flex"} flexDir={"row"}>
+          <Text fontWeight={500} m={"auto"}>
+            {imovel.qtdBanheiro}
+          </Text>
+        </Box>
+      </Td>
+      <Td>
         <Box display={"flex"} flexDir={"row"} gap={2}>
           <Text fontWeight={500} m={"auto"}>
             {imovel.qtdGaragem}
@@ -74,7 +80,7 @@ export function ItemImovel({ imovel }: ItemImovelProps) {
       <Td>
         <Box display={"flex"} flexDir={"row"}>
           <Text fontWeight={500} m={"auto"}>
-            {formatBrl(imovel.valor)}
+            {imovel.valor}
           </Text>
         </Box>
       </Td>
