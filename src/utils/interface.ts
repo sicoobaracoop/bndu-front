@@ -6,13 +6,21 @@ export interface Imoveis {
     qtdBanheiro: number;
     qtdGaragem: string,
     qtdQuarto: string,
-    valor: number,
+    valor: string,
     numeroDeMatricula: string,
     area: string,
     descricao: string,
+    linkMapa: string,
     tipo: Tipo;
     cidade: Cidade;
+    gerente: Gerente;
     imagens: Imagem[];
+}
+
+export interface Gerente {
+    id: number
+    nome: string;
+    contato: string;
 }
 
 export interface Imagem {

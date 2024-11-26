@@ -28,6 +28,7 @@ export function TabComponente() {
     onClose: onCloseTipo,
     onOpen: onOpenTipo,
   } = useDisclosure();
+ 
 
   const openModalCadastrarImovel = () => {
     onOpen();

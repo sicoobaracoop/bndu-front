@@ -12,6 +12,7 @@ export const validationSchemaCreateImovel = zod.object({
     cidadeID: zod.string().min(1),
     tipoID: zod.string().min(1),
     endereco: zod.string().min(1),
+    linkMapa: zod.string(),
     quantidadeQuarto: zod.string(),
     quantidadeGaragem: zod.string(),
     quantidadeBanheiros: zod.string(),
@@ -33,8 +34,14 @@ export const validationSchemaLoginUser = zod.object({
     password: zod.string().min(2),
 });
 
+export const validationSchemaCreateGerente = zod.object({
+    nome: zod.string().min(3),
+    contanto: zod.string().min(5),
+})
+
 export type newFormDataCreateTipo = zod.infer<typeof validationSchemaCreateTipo>;
 export type newFormDataCreateCidade = zod.infer<typeof validationSchemaCreateCidade>;
+export type newFormDataCreateGerente = zod.infer<typeof validationSchemaCreateGerente>;
 export type newFormDataCreateImovel = zod.infer<typeof validationSchemaCreateImovel>;
 export type newFormDataCreateUser = zod.infer<typeof validationSchemaCreateUser>;
 export type newFormDataLoginUser = zod.infer<typeof validationSchemaLoginUser>;

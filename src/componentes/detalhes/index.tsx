@@ -1,17 +1,18 @@
-import { Box, Button, Flex, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Link, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import { TbPointFilled } from "react-icons/tb";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { useParams } from "react-router-dom";
 import "react-image-gallery/styles/css/image-gallery.css";
-import { formatBrl } from "../../utils/formatar";
 import { LuBath, LuBedDouble } from "react-icons/lu";
 import { PiCityBold, PiGarageDuotone } from "react-icons/pi";
 import { BiArea } from "react-icons/bi";
 import { useFindImoveis } from "../../hooks/imoveis/useFindImoveis";
 import { FiMapPin } from "react-icons/fi";
+import { IoIosLink } from "react-icons/io";
 
 export function DetalhesComponente() {
+  const url = window.location.href;
   const { imovelId } = useParams();
   const { data } = useFindImoveis(Number(imovelId));
 
@@ -59,11 +60,11 @@ export function DetalhesComponente() {
             {data?.imovel.tipo.nomeDoTipo}
           </Text>
         </Flex>
-        <Box display={"flex"} flex={"row"} ml={"auto"}>
+        <Flex ml={"auto"}>
           <Text fontWeight={"bold"} fontSize={"xl"} color={"#7DB61C"}>
             {data?.imovel.valor}
           </Text>
-        </Box>
+        </Flex>
         <Flex
           display={"flex"}
           flex={"row"}
@@ -96,7 +97,7 @@ export function DetalhesComponente() {
           <Button
             onClick={() => {
               const text = encodeURIComponent(
-                `Olá, gostaria de saber mais detalhes sobre o imóvel Nº ${data?.imovel.id}, ${data?.imovel.tipo.nomeDoTipo}, ${data?.imovel.endereco}`
+                `Olá, eu consultei o catálogo de bens disponíveis para a venda e gostaria de saber mais detalhes sobre ${data?.imovel.tipo.nomeDoTipo}, ${data?.imovel.endereco}, disponivel em: ${url}`
               );
               window.open(
                 `https://api.whatsapp.com/send?phone=553432492550&text=${text}`,
@@ -121,19 +122,21 @@ export function DetalhesComponente() {
         </Box>
       </SimpleGrid>
 
-      <Box
+      <VStack
         borderTopRadius={"10"}
         boxShadow={"rgba(0, 0, 0, 0.16) 0px 1px 4px"}
         m={"auto"}
         maxW={"95%"}
         bg={"white"}
         p={5}
-        flexDir={"column"}
+        flexDir={"row"}
         gap={3}
         display={{ base: "grid", xl: "none" }}
       >
         <Flex gap={2} m={"auto"}>
-          <Text fontWeight={"bold"}>{data?.imovel.endereco} - </Text>
+          <Text fontWeight={"bold"} textAlign={'center'}>{data?.imovel.endereco} - </Text>
+        </Flex>
+        <Flex gap={2} m={"auto"}>
           <Text fontWeight={"bold"}>{data?.imovel.cidade.nomeDaCidade}</Text>
         </Flex>
         <Flex gap={2} m={"auto"}>
@@ -142,21 +145,24 @@ export function DetalhesComponente() {
         </Flex>
         <Flex gap={2} m={"auto"}>
           <Text fontWeight={"bold"}>{data?.imovel.qtdGaragem} vaga(s)</Text>
-          <Text fontWeight={"bold"}>2 banheiro(s)</Text>
+          <Text fontWeight={"bold"}>{data?.imovel.qtdBanheiro} banheiro(s)</Text>
         </Flex>
         <Box>
           <Text textAlign={"center"} fontWeight={"bold"}>
-            {formatBrl(Number(data?.imovel.valor))}
+            {data?.imovel.valor}
           </Text>
         </Box>
-      </Box>
+      </VStack>
 
       <Box
+        display={"flex"}
+        flexDir={"column"}
         m={"auto"}
         w={{ base: "95%", xl: "90%" }}
         bg={"white"}
         p={7}
         boxShadow={"rgba(0, 0, 0, 0.16) 0px 1px 4px"}
+        rowGap={5}
       >
         <Text
           textTransform={"capitalize"}
@@ -166,6 +172,20 @@ export function DetalhesComponente() {
         >
           {data?.imovel.descricao}
         </Text>
+        {data?.imovel.linkMapa && (
+          <Flex alignItems={"center"} gap={2}>
+            <IoIosLink size={25} />
+            <Link
+              href={data.imovel.linkMapa}
+              target="true"
+              fontWeight={"500"}
+              fontSize={{ base: "sm", lg: "md" }}
+              textAlign={"justify"}
+            >
+              {data?.imovel.linkMapa}
+            </Link>
+          </Flex>
+        )}
         <Box mt={5} display={{ base: "grid", xl: "none" }}>
           <Button
             m={"auto"}

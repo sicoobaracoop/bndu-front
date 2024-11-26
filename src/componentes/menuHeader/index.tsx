@@ -9,8 +9,32 @@ export function MenuHeader() {
   const navigate = useNavigate();
 
   const handleClickWhats = () => {
-    window.open('https://wa.me/553432492550', '_blank', 'noopener,noreferrer')
-  }
+    window.open("https://wa.me/553432492550", "_blank", "noopener,noreferrer");
+  };
+
+  const clickInstagram = () => {
+    window.open(
+      "https://www.instagram.com/sicoobaracoop/",
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
+  const clickIFace = () => {
+    window.open(
+      "https://www.facebook.com/sicoobaracoop",
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
+  const clickYou = () => {
+    window.open(
+      "https://www.youtube.com/@SicoobAracoop1",
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
 
   function handleClick() {
     navigate("/");
@@ -66,6 +90,7 @@ export function MenuHeader() {
             transition: "0.5s",
             color: "#833AB4",
           }}
+          onClick={clickInstagram}
         >
           <CiInstagram />
         </Box>
@@ -76,11 +101,13 @@ export function MenuHeader() {
             transition: "0.5s",
             color: "#1877F2",
           }}
+          onClick={clickIFace}
         >
           <PiFacebookLogoLight />
         </Box>
         <Box
           _hover={{ cursor: "pointer", transition: "0.5s", color: "#FF0000" }}
+          onClick={clickYou}
         >
           <PiYoutubeLogoThin />
         </Box>

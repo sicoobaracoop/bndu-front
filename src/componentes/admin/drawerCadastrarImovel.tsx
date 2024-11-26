@@ -61,9 +61,10 @@ export function DrawerCadastrarImovel({
   } = useDisclosure();
   const { data } = useTipoAll();
   const { data: dataCidade } = useCidadeAll();
+
   const [files, setFiles] = useState<File[]>([]);
   const mutationCadastrarImovel = useMutationCreateImovel();
-  const [valor, setValor] = useState<string>('R$ 0,0');
+  const [valor, setValor] = useState<string>("R$ 0,0");
 
   const { register, handleSubmit, reset, getValues } =
     useForm<newFormDataCreateImovel>({
@@ -126,7 +127,7 @@ export function DrawerCadastrarImovel({
         onFileChange={handleFileChange}
         key={"modal-anexar-imagem"}
       />
-      <Drawer isOpen={isOpen} onClose={onClose} size={"md"}>
+      <Drawer isOpen={isOpen} onClose={onClose} size={"lg"}>
         <DrawerOverlay bg={"rgba(73, 71,157, 0.6)"} />
         <DrawerContent>
           <DrawerHeader gap={3} display={"flex"} flexDir={"row"}>
@@ -228,6 +229,15 @@ export function DrawerCadastrarImovel({
                 focusBorderColor={"#49479D"}
               />
             </FormControl>
+            <FormControl mb={5}>
+              <FormLabel>Link Mapa</FormLabel>
+              <Input
+                placeholder={"Se necessário informe"}
+                {...register("linkMapa")}
+                mt={-1.5}
+                focusBorderColor={"#49479D"}
+              />
+            </FormControl>
             <FormControl isRequired mb={5}>
               <FormLabel>Valor</FormLabel>
               <Input
@@ -258,7 +268,7 @@ export function DrawerCadastrarImovel({
               />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>Descriçaõ</FormLabel>
+              <FormLabel>Descrição</FormLabel>
               <Textarea
                 {...register("descricao")}
                 placeholder={"Adicione uma breve descrição sobre o imóvel"}

@@ -11,6 +11,7 @@ export function useMutationCreateImovel() {
             console.log('data.quantidadeBanheiros: ', data.quantidadeBanheiros)
             const formData = new FormData();
             formData.append('cidadeID', data.cidadeID);
+            formData.append('linkMapa', data.linkMapa);
             formData.append('tipoID', data.tipoID);
             formData.append('qtdQuarto', data.quantidadeQuarto);
             formData.append('qtdGaragem', data.quantidadeGaragem);

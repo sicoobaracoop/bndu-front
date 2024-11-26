@@ -63,6 +63,8 @@ export function ModalCadastrarTipo({
         </ModalBody>
         <ModalFooter>
           <Button
+            isLoading={mutationCreateTipo.isPending}
+            loadingText={'Aguarde...'}
             onClick={handleSubmit(criarNovoTipo)}
             bg={"#49479D"}
             color={"white"}

@@ -42,13 +42,21 @@ export function CardImoveis({ imovel }: CardImoveisProps) {
         transition: "box-shadow 0.8s, width 0.8s",
       }}
     >
-      <Image
-        borderTopRadius={"10"}
-        src={caminhoImageCard}
-        alt={"Imagem do card de Imóveis a venda"}
-        objectFit={"cover"}
-        width={"100%"}
-      />
+      <Box>
+        <Box bg={"rgba(125, 182, 28, 0.8)"} position={'absolute'} p={2} borderBottomRadius={5}>
+          <Text color={"white"} fontWeight={'bold'}>{imovel.valor}</Text>
+        </Box>
+        <Box>
+          <Image
+            borderTopRadius={"7"}
+            src={caminhoImageCard}
+            alt={"Imagem do card de Imóveis a venda"}
+            objectFit={"cover"}
+            width={"100%"}
+          />
+        </Box>
+      </Box>
+
       <Box p={4}>
         <Flex mb={5} alignItems={"center"}>
           <IoLocationOutline size={22} />
