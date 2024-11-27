@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { LuBath, LuBedDouble } from "react-icons/lu";
 import { PiGarageDuotone } from "react-icons/pi";
 import { BiArea } from "react-icons/bi";
-import { IoLocationOutline } from "react-icons/io5";
 
 interface CardImoveisProps {
   imovel: Imoveis;
@@ -43,8 +42,15 @@ export function CardImoveis({ imovel }: CardImoveisProps) {
       }}
     >
       <Box>
-        <Box bg={"rgba(125, 182, 28, 0.8)"} position={'absolute'} p={2} borderBottomRadius={5}>
-          <Text color={"white"} fontWeight={'bold'}>{imovel.valor}</Text>
+        <Box
+          bg={"rgba(125, 182, 28, 0.8)"}
+          position={"absolute"}
+          p={2}
+          borderBottomRadius={5}
+        >
+          <Text color={"white"} fontWeight={"bold"}>
+            {imovel.valor}
+          </Text>
         </Box>
         <Box>
           <Image
@@ -53,24 +59,26 @@ export function CardImoveis({ imovel }: CardImoveisProps) {
             alt={"Imagem do card de Imóveis a venda"}
             objectFit={"cover"}
             width={"100%"}
+            height={{ xl: "25vh", base: "55vh" }}
           />
         </Box>
       </Box>
 
       <Box p={4}>
-        <Flex mb={5} alignItems={"center"}>
-          <IoLocationOutline size={22} />
+        <Flex mb={5} justifyContent={"center"}>
           <Text
+            color={"#636363"}
+            textAlign={"center"}
             whiteSpace="nowrap"
             overflow="hidden"
             textOverflow="ellipsis"
             fontSize={{ base: "sm", xl: "md" }}
-            fontWeight={"400"}
+            fontWeight={"500"}
           >
-            {imovel.endereco} - {imovel.cidade.nomeDaCidade}
+            {imovel.cidade.nomeDaCidade} {imovel.tipo.nomeDoTipo}
           </Text>
         </Flex>
-        <Flex gap={5} mb={5} justifyContent={"center"}>
+        <Flex gap={5} mb={5} justifyContent={"center"} color={"#636363"}>
           {imovel.qtdQuarto && (
             <Flex gap={1}>
               <LuBedDouble size={22} />

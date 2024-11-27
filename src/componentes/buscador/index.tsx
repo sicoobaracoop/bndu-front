@@ -45,10 +45,15 @@ export function BuscadorDeImoveis() {
 
   const [valorMinimo, setValorMinimo] = useState<string>("");
   const [valorMaximo, setValorMaximo] = useState<string>("");
-  
+
   return (
     <Flex bg={"white"} justifyContent={"center"}>
-      <SimpleGrid columns={{ base: 1, md: 5 }} w={"90%"} gap={5} p={2}>
+      <SimpleGrid
+        columns={{ base: 1, md: 5 }}
+        w={{ base: "100%", lg: "85%" }}
+        gap={5}
+        p={5}
+      >
         <FormControl>
           <FormLabel fontSize={{ base: "sm", md: "md" }} mb={0}>
             Categorias:
@@ -73,7 +78,7 @@ export function BuscadorDeImoveis() {
             {...register("filtro.valorMinimo")}
             focusBorderColor={"#49479D"}
             value={valorMinimo}
-            placeholder={'Informe um valor mínimo'}
+            placeholder={"Informe um valor mínimo"}
             onChange={(e) => setValorMinimo(formatarBrl(e))}
           />
         </FormControl>
@@ -85,7 +90,7 @@ export function BuscadorDeImoveis() {
             {...register("filtro.valorMaximo")}
             focusBorderColor={"#49479D"}
             value={valorMaximo}
-            placeholder={'Informe um valor máximo'}
+            placeholder={"Informe um valor máximo"}
             onChange={(e) => setValorMaximo(formatarBrl(e))}
           />
         </FormControl>
@@ -106,12 +111,12 @@ export function BuscadorDeImoveis() {
           </Select>
         </FormControl>
         <Button
-          rightIcon={<TbFilterSearch size={22} />}
+          rightIcon={<TbFilterSearch size={20} />}
           onClick={() => handleFilter()}
           isLoading={isSubmitting}
           loadingText={"Buscando..."}
           w={{ base: "100%", md: "70%" }}
-          mt={{ md: "7%" }}
+          mt={{ md: "8%" }}
           bg={"#49479D"}
           color={"white"}
           borderRadius={5}

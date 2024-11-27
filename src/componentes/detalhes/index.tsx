@@ -1,15 +1,17 @@
-import { Box, Button, Flex, Link, SimpleGrid, Text, VStack } from "@chakra-ui/react";
-import { TbPointFilled } from "react-icons/tb";
-import ImageGallery from "react-image-gallery";
-import "react-image-gallery/styles/css/image-gallery.css";
+import {
+  Badge,
+  Box,
+  Button,
+  Flex,
+  Text,
+  Tooltip,
+  useBreakpointValue,
+  VStack,
+} from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import "react-image-gallery/styles/css/image-gallery.css";
-import { LuBath, LuBedDouble } from "react-icons/lu";
-import { PiCityBold, PiGarageDuotone } from "react-icons/pi";
-import { BiArea } from "react-icons/bi";
 import { useFindImoveis } from "../../hooks/imoveis/useFindImoveis";
-import { FiMapPin } from "react-icons/fi";
-import { IoIosLink } from "react-icons/io";
+import { FaMapMarkedAlt } from "react-icons/fa";
+import ImageGallery from "./components/galeria";
 
 export function DetalhesComponente() {
   const url = window.location.href;
@@ -23,77 +25,128 @@ export function DetalhesComponente() {
       thumbnail:
         import.meta.env.VITE_BASE_URL + "storage/" + imagem.caminhoImagem,
     })) || [];
-
+  const isMobile = useBreakpointValue({ base: true, md: false });
   return (
-    <Box mt={10} mb={10}>
-      <SimpleGrid
-        columns={4}
-        templateColumns={"40% 25% 10% 25%"}
-        w={"90%"}
-        m={"auto"}
-        bg={"white"}
-        p={5}
-        rowGap={5}
-        borderTopRadius={"10"}
-        boxShadow={"rgba(0, 0, 0, 0.16) 0px 1px 4px"}
-        display={{ base: "none", xl: "grid" }}
-      >
-        <Flex gap={2} alignItems={"center"}>
-          <FiMapPin size={22} />
+    <VStack
+      bg={"white"}
+      display={"flex"}
+      justifyContent={"center"}
+      flexDir={"column"}
+    >
+      <Box w={{ base: "100%", lg: "75%" }}>
+        <Flex
+          p={3}
+          justifyContent={"space-between"}
+          flexDir={{ base: "column", lg: "row" }}
+        >
           <Text
-            textTransform={"capitalize"}
+            textAlign={{ base: "center" }}
+            fontSize={{ base: "md", lg: "xl" }}
             fontWeight={"bold"}
-            fontSize={"xl"}
+            color={"#454545"}
           >
             {data?.imovel.endereco}
           </Text>
+          {isMobile === true ? (
+            <Text
+              textAlign={"center"}
+              fontSize={"md"}
+              color={"#178620"}
+              fontWeight={"bold"}
+            >
+              {data?.imovel.valor}
+            </Text>
+          ) : (
+            <Badge colorScheme="green" p={2} borderRadius={5}>
+              <Text fontSize={"md"} color={"#178620"} fontWeight={"bold"}>
+                {data?.imovel.valor}
+              </Text>
+            </Badge>
+          )}
         </Flex>
-        <Flex gap={2} alignItems={"center"}>
-          <PiCityBold size={25} />
-          <Text fontWeight={"bold"} fontSize={"xl"}>
-            {data?.imovel.cidade.nomeDaCidade}
+        <Box m={{ base: "auto", lg: "1%" }} w={{ base: "80%", lg: "80%" }}>
+          <Text textAlign={{ base: "center", lg: "left" }}>
+            {data?.imovel.descricao}
           </Text>
-        </Flex>
-        <Flex alignItems={"center"}>
-          <TbPointFilled size={25} />
-          <Text fontWeight={"bold"} fontSize={"xl"}>
-            {data?.imovel.tipo.nomeDoTipo}
-          </Text>
-        </Flex>
-        <Flex ml={"auto"}>
-          <Text fontWeight={"bold"} fontSize={"xl"} color={"#7DB61C"}>
-            {data?.imovel.valor}
-          </Text>
-        </Flex>
-        <Flex
-          display={"flex"}
-          flex={"row"}
-          gap={3}
-          alignItems={"center"}
-          mt={2}
-        >
-          <LuBedDouble size={25} />
-          <Text fontWeight={"500"} fontSize={"xl"}>
-            {data?.imovel.qtdQuarto} Quarto(s)
-          </Text>
-          <PiGarageDuotone size={25} />
-          <Text fontWeight={"500"} fontSize={"xl"}>
-            {data?.imovel.qtdGaragem} Vaga(s)
-          </Text>
-        </Flex>
-        <Flex alignItems={"center"} mt={2} gap={1}>
-          <LuBath size={25} />
-          <Text fontWeight={"500"} fontSize={"xl"}>
-            {data?.imovel.qtdGaragem} Banheiro(s)
-          </Text>
-        </Flex>
-        <Flex alignItems={"center"} mt={2}>
-          <BiArea size={25} />
-          <Text fontWeight={"500"} fontSize={"xl"}>
-            {data?.imovel.area} m²
-          </Text>
-        </Flex>
-        <Box ml={"auto"} mt={2}>
+        </Box>
+
+        {data?.imovel.imagens && (
+          <Flex justifyContent={"center"}>
+            <ImageGallery images={sliderImageUrl} />
+          </Flex>
+        )}
+
+        <Box p={5} w={"100%"}>
+          <Flex
+            justifyContent={"space-between"}
+            flexDir={{ base: "column", lg: "row" }}
+          >
+            <Text
+              color={"#454545"}
+              fontFamily={"Parkinsans"}
+              fontSize={"xl"}
+              fontWeight={"bold"}
+              textAlign={'center'}
+            >
+              {data?.imovel.tipo.nomeDoTipo} em{" "}
+              {data?.imovel.cidade.nomeDaCidade}
+            </Text>
+
+            {data?.imovel.linkMapa && (
+              <Tooltip
+                label={"Veja no mapa"}
+                placement={"right"}
+                borderRadius={5}
+                hasArrow
+                bg={"#49479D"}
+              >
+                {isMobile === true ? (
+                  <Text textAlign={'center'} fontSize={"small"} fontWeight={"500"} color={"#454545"}>
+                    {data?.imovel.linkMapa}
+                  </Text>
+                ) : (
+                  <Flex cursor={"pointer"} alignItems={"center"} gap={2}>
+                    <FaMapMarkedAlt size={20} color={"#5e5e5e"} />
+                    <Text fontSize={"md"} fontWeight={"500"} color={"#454545"}>
+                      {data?.imovel.linkMapa}
+                    </Text>
+                  </Flex>
+                )}
+              </Tooltip>
+            )}
+          </Flex>
+          <Flex columnGap={3} mt={{ base: "10%", lg: 0 }}>
+            {data?.imovel.qtdQuarto && (
+              <Text
+                textAlign={{ base: "center" }}
+                fontSize={{ base: "sm", lg: "md" }}
+              >
+                {data?.imovel.qtdQuarto} quarto(s)
+              </Text>
+            )}
+            {data?.imovel.qtdBanheiro && (
+              <Text
+                textAlign={{ base: "center" }}
+                fontSize={{ base: "sm", lg: "md" }}
+              >
+                {data?.imovel.qtdBanheiro} banheiro(s)
+              </Text>
+            )}
+            {data?.imovel.qtdGaragem && (
+              <Text
+                textAlign={{ base: "center" }}
+                fontSize={{ base: "sm", lg: "md" }}
+              >
+                {data?.imovel.qtdGaragem} vaga(s)
+              </Text>
+            )}
+            <Text
+              textAlign={{ base: "center" }}
+              fontSize={{ base: "sm", lg: "md" }}
+            >
+              {data?.imovel.area} m²
+            </Text>
+          </Flex>
           <Button
             onClick={() => {
               const text = encodeURIComponent(
@@ -104,115 +157,18 @@ export function DetalhesComponente() {
                 "_blank"
               );
             }}
-            borderRadius={"4"}
-            bg={"#7DB61C"}
-            color={"white"}
-            _hover={{
-              borderRadius: "50",
-              bg: "transparent",
-              border: "1px solid #7DB61C",
-              color: "#7DB61C",
-              transition: "0.8s",
-            }}
+            border={"2px solid #7DB61C"}
+            color={"#7DB61C"}
+            background={"transparent"}
+            mt={"5%"}
+            ml={"auto"}
+            w={"100%"}
+            _hover={{ background: "#7DB61C", color: "white" }}
           >
-            <Text fontWeight={"bold"} fontSize={"xl"}>
-              Tenho Interesse
-            </Text>
-          </Button>
-        </Box>
-      </SimpleGrid>
-
-      <VStack
-        borderTopRadius={"10"}
-        boxShadow={"rgba(0, 0, 0, 0.16) 0px 1px 4px"}
-        m={"auto"}
-        maxW={"95%"}
-        bg={"white"}
-        p={5}
-        flexDir={"row"}
-        gap={3}
-        display={{ base: "grid", xl: "none" }}
-      >
-        <Flex gap={2} m={"auto"}>
-          <Text fontWeight={"bold"} textAlign={'center'}>{data?.imovel.endereco} - </Text>
-        </Flex>
-        <Flex gap={2} m={"auto"}>
-          <Text fontWeight={"bold"}>{data?.imovel.cidade.nomeDaCidade}</Text>
-        </Flex>
-        <Flex gap={2} m={"auto"}>
-          <Text fontWeight={"bold"}>{data?.imovel.tipo.nomeDoTipo} - </Text>
-          <Text fontWeight={"bold"}>{data?.imovel.qtdQuarto} quarto(s)</Text>
-        </Flex>
-        <Flex gap={2} m={"auto"}>
-          <Text fontWeight={"bold"}>{data?.imovel.qtdGaragem} vaga(s)</Text>
-          <Text fontWeight={"bold"}>{data?.imovel.qtdBanheiro} banheiro(s)</Text>
-        </Flex>
-        <Box>
-          <Text textAlign={"center"} fontWeight={"bold"}>
-            {data?.imovel.valor}
-          </Text>
-        </Box>
-      </VStack>
-
-      <Box
-        display={"flex"}
-        flexDir={"column"}
-        m={"auto"}
-        w={{ base: "95%", xl: "90%" }}
-        bg={"white"}
-        p={7}
-        boxShadow={"rgba(0, 0, 0, 0.16) 0px 1px 4px"}
-        rowGap={5}
-      >
-        <Text
-          textTransform={"capitalize"}
-          fontWeight={"500"}
-          fontSize={{ base: "sm", lg: "md" }}
-          textAlign={"justify"}
-        >
-          {data?.imovel.descricao}
-        </Text>
-        {data?.imovel.linkMapa && (
-          <Flex alignItems={"center"} gap={2}>
-            <IoIosLink size={25} />
-            <Link
-              href={data.imovel.linkMapa}
-              target="true"
-              fontWeight={"500"}
-              fontSize={{ base: "sm", lg: "md" }}
-              textAlign={"justify"}
-            >
-              {data?.imovel.linkMapa}
-            </Link>
-          </Flex>
-        )}
-        <Box mt={5} display={{ base: "grid", xl: "none" }}>
-          <Button
-            m={"auto"}
-            borderRadius={"4"}
-            bg={"#7DB61C"}
-            color={"white"}
-            size={"sm"}
-          >
-            <Text fontWeight={"bold"} fontSize={"xl"}>
-              Tenho Interesse
-            </Text>
+            Tenho interesse
           </Button>
         </Box>
       </Box>
-      <Box
-        justifyContent={"center"}
-        w={{ base: "95%", xl: "90%" }}
-        m={"auto"}
-        display={"flex"}
-        borderBottomRadius={"10"}
-        bg={"white"}
-        border={"1px solid #e6e6e6"}
-      >
-        <Box w={{ base: "100%", xl: "75%" }} p={5}>
-          <ImageGallery items={sliderImageUrl} />
-        </Box>
-      </Box>
-    </Box>
+    </VStack>
   );
 }

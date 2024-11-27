@@ -4,13 +4,13 @@ import { Outlet } from "react-router-dom";
 import { Rodape } from "../rodape";
 
 export function Dashboard() {
-    return (
-        <Box>
-            <MenuHeader />
-            <Box>
-                <Outlet />
-            </Box>
-            <Rodape />
-        </Box>
-    )
+  return (
+    <Box>
+      <MenuHeader />
+      <Box>
+        <Outlet />
+        <Rodape />
+      </Box>
+    </Box>
+  );
 }

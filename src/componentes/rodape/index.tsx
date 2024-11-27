@@ -14,7 +14,7 @@ export function Rodape() {
                 textAlign={'center'}
                 fontWeight={'500'}
                 color={'white'}
-                fontSize={'md'}
+                fontSize={{base: 'small', lg: 'md'}}
             >
                 © 1999 - {anoAtual} Sicoob Aracoop
             </Text>

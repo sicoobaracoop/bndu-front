@@ -261,6 +261,7 @@ export function DrawerCadastrarImovel({
             <FormControl isRequired mb={5}>
               <FormLabel>Área</FormLabel>
               <Input
+                type={"number"}
                 placeholder={"Informe a área do imovél"}
                 {...register("area")}
                 mt={-1.5}
